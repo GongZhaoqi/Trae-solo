@@ -56,6 +56,8 @@
 | 知识图谱 | Neo4j | Graph-RAG核心存储 |
 | 向量数据库 | Pinecone/Chroma | 语义检索支持 |
 | AI模型 | OpenAI/国产大模型 | 剧本生成与决策分析 |
+| 多模态感知 | Google MediaPipe | 实时视频/语音/姿态采集与分析 |
+| 语音识别 | Google Speech-to-Text | 高精度语音转文字 |
 | 实时通信 | WebSocket | 实时反馈与协作 |
 | 数据存储 | PostgreSQL | 结构化数据存储 |
 
@@ -82,20 +84,33 @@ backend/app/cases/
 
 ### 2. 多模态数据采集系统
 
+**技术方案：采用 Google MediaPipe 框架**
+
 **功能：**
-- 实时视频流采集（摄像头）
-- 语音数据采集与识别
-- 操作行为记录
+- 实时视频流采集与处理（摄像头）
+- 人脸检测与表情识别（MediaPipe Face Mesh）
+- 手部姿态与操作识别（MediaPipe Hands）
+- 语音数据采集与识别（Google Speech-to-Text）
+- 操作行为记录与分析
 - 生理指标模拟输入
 
 **文件结构：**
 ```
 backend/app/sensors/
-├── video/            # 视频处理
-├── audio/            # 语音处理
+├── video/            # 视频流处理（MediaPipe集成）
+├── audio/            # 语音识别（Google STT）
+├── pose/             # 姿态分析（MediaPipe Pose）
 ├── behavior/         # 行为分析
 └── vitals/           # 生理指标
 ```
+
+**Google MediaPipe 应用场景：**
+| 功能 | MediaPipe模块 | 临床实训价值 |
+|------|--------------|-------------|
+| 表情识别 | Face Mesh | 分析学生沟通时的表情变化 |
+| 手势识别 | Hands | 记录操作仪器的手部动作 |
+| 姿态估计 | Pose | 评估问诊时的肢体语言 |
+| 实时追踪 | Objectron | 追踪实训操作对象 |
 
 ### 3. Graph-RAG 决策引擎
 
